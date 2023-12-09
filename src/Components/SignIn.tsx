@@ -35,7 +35,7 @@ export const SignIn = () => {
       };
     }
   }, []);
-
+  console.log(userProfile?.userName);
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {

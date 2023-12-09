@@ -13,6 +13,7 @@ export interface CaUser extends CaUserId {
   mfaEnabled?: boolean;
   lastLogin?: Date;
   bio?: string;
+  postCount?: number;
   posts?: CaPost[];
 }
 export interface CaPostId {

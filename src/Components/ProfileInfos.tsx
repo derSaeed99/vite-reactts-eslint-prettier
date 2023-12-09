@@ -60,8 +60,6 @@ export const ProfileInfos = ({ userProfile }: ProfileInforProps) => {
   return (
     <Box
       sx={{
-        mt: 16,
-        width: 250,
         boxShadow: 1,
         borderRadius: "borderRadius",
         display: "flex",
@@ -69,7 +67,7 @@ export const ProfileInfos = ({ userProfile }: ProfileInforProps) => {
         alignItems: "center",
       }}
     >
-      <Box>
+      <Box sx={{ mt: 2 }}>
         <AvatarInput
           value={userProfile?.photoUrl ?? avatarImage}
           userId={userId ?? ""}

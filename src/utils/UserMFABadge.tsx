@@ -4,9 +4,10 @@ import starBadge from "../assets/star-badge-green.svg";
 // https://www.svgrepo.com/svg/1195/premium-badge?edit=true
 interface UserMFABadgeProps {
   value: boolean;
+  label?: boolean;
 }
 
-export const UserMFABadge = ({ value }: UserMFABadgeProps) => {
+export const UserMFABadge = ({ value, label }: UserMFABadgeProps) => {
   return (
     <Box
       sx={{
@@ -21,9 +22,11 @@ export const UserMFABadge = ({ value }: UserMFABadgeProps) => {
         alt="star badge"
         style={{ width: "20px", height: "20px" }}
       />
-      <Typography variant="caption" sx={{ color: "GrayText" }}>
-        MF
-      </Typography>
+      {label && (
+        <Typography variant="caption" sx={{ color: "GrayText" }}>
+          MF
+        </Typography>
+      )}
     </Box>
   );
 };

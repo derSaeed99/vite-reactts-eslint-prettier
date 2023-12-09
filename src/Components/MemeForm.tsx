@@ -5,9 +5,32 @@ import { Timestamp } from "firebase/firestore";
 import { Field, Form, Formik } from "formik";
 import { Select, TextField } from "formik-mui";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { auth, uploadMemeAndSaveUrl } from "../firebase";
 import { CaPost } from "../model";
+
+// const validationSchema = Yup.object().shape({
+//   caption: Yup.string().required("Required"),
+//   category: Yup.string().required("Required"),
+//   image: Yup.mixed()
+//     .required("Required")
+//     .test("fileType", "Unsupported File Format", (value) => {
+//       console.log("Testing file type:", value);
+//       if (!value) {
+//         return false;
+//       }
+//       const supportedFormats = [
+//         "image/jpeg",
+//         "image/png",
+//         "image/gif",
+//         "video/mp4",
+//       ];
+//       const isValid = supportedFormats.includes((value as File).type);
+//       console.log("Validation result:", isValid);
+//       return isValid;
+//     }),
+// });
 
 const categories = [
   {
@@ -20,23 +43,6 @@ const categories = [
   },
 ];
 
-// const validationSchema = Yup.object().shape({
-//   caption: Yup.string().required('Required'),
-//   category: Yup.string().required('Required'),
-//   image: Yup.mixed()
-//     .required('Required')
-//     .test('fileType', 'Unsupported File Format', (value) => {
-//       console.log('Testing file type:', value);
-//       if (!value) {
-//         return false;
-//       }
-//       const supportedFormats = ['image/jpeg', 'image/png', 'image/gif', 'video/mp4'];
-//       const isValid = supportedFormats.includes((value as File).type);
-//       console.log('Validation result:', isValid);
-//       return isValid;
-//     }),
-// });
-
 export interface MemeFormValues {
   caption: string;
   category: string;
@@ -46,6 +52,7 @@ export interface MemeFormValues {
 export const MemeForm = () => {
   const [image, setImage] = useState<File>();
   const [imageUrl, setImageUrl] = useState<string>();
+  const navigate = useNavigate();
   const handleSubmit = async (values: MemeFormValues) => {
     const postData: CaPost = {
       userId: auth.currentUser?.uid || "",
@@ -60,6 +67,7 @@ export const MemeForm = () => {
     };
     if (image) {
       await uploadMemeAndSaveUrl(image, postData);
+      navigate("/");
     }
   };
   const initialValues = {
@@ -67,7 +75,6 @@ export const MemeForm = () => {
     category: "",
     imageUrl: "",
   };
-
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -80,12 +87,12 @@ export const MemeForm = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Formik
+        // validationSchema={validationSchema}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        // validationSchema={validationSchema}
       >
         {({ isSubmitting }) => (
-          <Grid container height="100vh">
+          <Grid container>
             <Grid
               item
               xs={12}

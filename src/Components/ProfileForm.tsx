@@ -35,7 +35,6 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
       });
     }
   }, [userProfile]);
-
   const handleSubmit = async (values: UserProfileFormValues) => {
     if (userId && userProfile) {
       const updateData = {
@@ -54,6 +53,7 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
 
   return (
     <Formik
+      enableReinitialize={true}
       initialValues={initialValues}
       onSubmit={(values) => {
         handleSubmit(values);
@@ -61,7 +61,7 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
     >
       {({ dirty }) => (
         <Form>
-          <Grid container direction="column" alignItems="center" sx={{ mt: 2 }}>
+          <Grid container direction="column" sx={{ mt: 2 }}>
             <Grid item>
               <Field
                 sx={{
@@ -148,7 +148,6 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
                     type="checkbox"
                     name="mfaEnabled"
                     component={Switch}
-                    label="Multi-Factor Authentication"
                   />
                 }
                 label="Multi-Factor Auth"

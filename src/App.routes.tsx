@@ -8,9 +8,9 @@ import {
 } from "react-router-dom";
 
 import { App } from "./App";
-import { MemeForm } from "./Components/MemeForm";
 import { SignIn } from "./Components/SignIn";
 import { Legal } from "./Pages/Legal";
+import { MemeUpload } from "./Pages/MemeUpload";
 import { Privacy } from "./Pages/Privacy";
 import { ProtectedRoute } from "./utils/ProtectedRoute";
 
@@ -42,7 +42,6 @@ const SignInRedirect = () => {
     : null;
   const location = useLocation();
   const redirect = location.state?.from;
-  console.log(userExists);
   return userExists ? <Navigate to={redirect || "/"} /> : <SignIn />;
 };
 
@@ -65,8 +64,8 @@ export const router = createBrowserRouter(
           }}
         />
       </Route>
-      <Route path="/form" element={<ProtectedRoute />}>
-        <Route path="/form" element={<MemeForm />} />
+      <Route path="/meme-upload" element={<ProtectedRoute />}>
+        <Route path="/meme-upload" element={<MemeUpload />} />
       </Route>
       <Route path="" element={<RootRedirect />} />
       <Route path="signin" element={<SignInRedirect />} />

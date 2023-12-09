@@ -163,7 +163,11 @@ export const uploadMemeAndSaveUrl = async (
 
 export const subscribeToMemes = (callback: (posts: CaPost[]) => void) => {
   const memesCollectionRef = collection(db, "posts");
-  const memesQuery = query(memesCollectionRef, orderBy("created"), limit(20));
+  const memesQuery = query(
+    memesCollectionRef,
+    orderBy("created", "desc"),
+    limit(20)
+  );
   return onSnapshot(memesQuery, (snapshot) => {
     const memes = snapshot.docs.map((doc) => ({
       postId: doc.id,

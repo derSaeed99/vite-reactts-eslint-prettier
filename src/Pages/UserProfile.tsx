@@ -1,6 +1,7 @@
-import { Box } from "@mui/material";
+import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import { Box, Grid, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { ProfileForm } from "../Components/ProfileForm";
 import { ProfileInfos } from "../Components/ProfileInfos";
@@ -10,6 +11,7 @@ import { CaUser } from "../model";
 export const UserProfile = () => {
   const [userProfile, setUserProfile] = useState<CaUser | null>(null);
   const { userId } = useParams<{ userId: string }>();
+  const navigate = useNavigate();
   useEffect(() => {
     if (userId) {
       const unsubscribeToUserProfile = subscribeToUser({
@@ -27,18 +29,30 @@ export const UserProfile = () => {
       };
     }
   }, [userId]);
-
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+    <Grid
+      container
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <ProfileInfos userProfile={userProfile} />
-      <ProfileForm userProfile={userProfile} />
-    </Box>
+      <Grid item sm={4}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            mt: 2,
+            mb: 4,
+          }}
+        >
+          <IconButton onClick={() => navigate("/")}>
+            <ArrowBackIosNewRoundedIcon sx={{ color: "white" }} />
+          </IconButton>
+          <Typography sx={{ color: "white" }}>Home</Typography>
+        </Box>
+        <Box>
+          <ProfileInfos userProfile={userProfile} />
+          <ProfileForm userProfile={userProfile} />
+        </Box>
+      </Grid>
+    </Grid>
   );
 };

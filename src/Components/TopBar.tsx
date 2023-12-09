@@ -89,6 +89,7 @@ export const TopBar = () => {
     vertical: "bottom",
     horizontal: "left",
   };
+
   return (
     <>
       <AppBar
