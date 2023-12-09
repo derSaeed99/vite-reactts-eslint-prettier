@@ -29,9 +29,8 @@ export const PostFooter = ({ post }: PostFooterProps) => {
       sx={{
         display: "flex",
         alignItems: "center",
-        mt: 2,
-        mb: 2,
         justifyContent: "flex-start",
+        mt: 1,
       }}
     >
       <IconButton

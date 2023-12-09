@@ -4,5 +4,5 @@ import { getFirestore } from "firebase-admin/firestore";
 initializeApp();
 export const firestore = getFirestore();
 
-export { incrementusercounter } from "./onDocumentWrite/onUserCount";
-export { incrementpostcounter } from "./onDocumentWrite/onPostCount";
+export { incrementusercounter } from "./onwrites/onusercount";
+export { onpostwrite } from "./onwrites/onpostwrite";

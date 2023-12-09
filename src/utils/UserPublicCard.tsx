@@ -23,7 +23,9 @@ export const UserPublicCard = ({ user }: UserPrublicCardProps) => {
             <Typography sx={{ mr: 1 }} variant="caption" color="white">
               {user?.userName}
             </Typography>
-            <UserMFABadge value={user?.mfaEnabled ?? false} />
+            {user?.mfaEnabled && (
+              <UserMFABadge value={user?.mfaEnabled ?? false} />
+            )}
           </Box>
           <Typography variant="caption" color="white">
             N#{user?.userNumber}

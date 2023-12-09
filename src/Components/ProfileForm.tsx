@@ -1,4 +1,4 @@
-import { Button, FormControlLabel, Grid } from "@mui/material";
+import { Button, FormControlLabel, Grid, Typography } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import { Switch, TextField } from "formik-mui";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ interface UserProfileFormProps {
 export interface UserProfileFormValues {
   userName: string;
   bio: string;
-  mfaEnabled: boolean;
+  mfaEnabled?: boolean;
 }
 
 export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
@@ -31,16 +31,17 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
       setInitialValues({
         userName: userProfile.userName,
         bio: userProfile.bio ?? "",
-        mfaEnabled: userProfile.mfaEnabled ?? false,
+        mfaEnabled: userProfile.mfaEnabled,
       });
     }
   }, [userProfile]);
   const handleSubmit = async (values: UserProfileFormValues) => {
-    if (userId && userProfile) {
+    if (userId) {
+      console.log(values.mfaEnabled);
       const updateData = {
         userName: values.userName || initialValues.userName,
         bio: values.bio || initialValues.bio,
-        mfaEnabled: values.mfaEnabled || initialValues.mfaEnabled,
+        mfaEnabled: values.mfaEnabled,
       };
       try {
         await updateUserProfile(userId, updateData);
@@ -59,7 +60,7 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
         handleSubmit(values);
       }}
     >
-      {({ dirty }) => (
+      {({ dirty, values }) => (
         <Form>
           <Grid container direction="column" sx={{ mt: 2 }}>
             <Grid item>
@@ -68,7 +69,7 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
                   mb: 2,
                   color: "white",
                   border: "1px solid rgba(255, 255, 255, 0.5)",
-                  borderRadius: "10px",
+                  borderRadius: 50,
                   ":hover": {
                     color: "white",
                     border: "1px solid rgba(255, 255, 255, 0)",
@@ -97,7 +98,7 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
                   mb: 2,
                   color: "white",
                   border: "1px solid rgba(255, 255, 255, 0.5)",
-                  borderRadius: "10px",
+                  borderRadius: 50,
                   ":hover": {
                     color: "white",
                     border: "1px solid rgba(255, 255, 255, 0)",
@@ -122,13 +123,15 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
             </Grid>
             <Grid item>
               <FormControlLabel
+                checked={values.mfaEnabled}
                 control={
                   <Field
                     sx={{
                       mb: 2,
+                      ml: 1,
                       color: "white",
                       border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: "10px",
+                      borderRadius: 50,
                       ":hover": {
                         color: "white",
                         border: "1px solid rgba(255, 255, 255, 0)",
@@ -150,7 +153,12 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
                     component={Switch}
                   />
                 }
-                label="Multi-Factor Auth"
+                labelPlacement="end"
+                label={
+                  <Typography sx={{ mb: 2, ml: 2 }} color="white">
+                    Multi-Factor Auth
+                  </Typography>
+                }
               />
             </Grid>
             <Grid item>

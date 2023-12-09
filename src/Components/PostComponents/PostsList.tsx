@@ -13,7 +13,7 @@ export const PostsList = ({ posts }: PostsListProps) => {
     <List>
       {posts?.map((post) => (
         <>
-          <ListItem key={post.postId} sx={{ borderRadius: "8px", mb: 2 }}>
+          <ListItem key={post.postId} sx={{ borderRadius: "8px" }}>
             <Grid
               item
               xs={12}
@@ -51,7 +51,7 @@ export const PostsList = ({ posts }: PostsListProps) => {
             </Grid>
           </ListItem>
           <Grid item xs={12}>
-            <Divider sx={{ mt: 2, mb: 2, borderColor: "GrayText" }} />
+            <Divider sx={{ borderColor: "GrayText" }} />
           </Grid>
         </>
       ))}

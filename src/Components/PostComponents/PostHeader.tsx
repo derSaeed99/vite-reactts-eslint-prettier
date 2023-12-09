@@ -40,10 +40,6 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
   return (
     <Box>
       <ListItemText
-        sx={{
-          mt: 2,
-          mb: 2,
-        }}
         primary={<UserPublicCard user={userProfile} />}
         secondary={
           <Box

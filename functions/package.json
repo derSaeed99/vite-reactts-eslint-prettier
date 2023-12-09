@@ -1,12 +1,13 @@
 {
   "name": "functions",
   "scripts": {
-    "lint": "eslint .",
-    "build": "npm run lint && tsc",
+    "lint": "tsc && eslint --ext js,ts,tsx src",
+    "lint:fix": "eslint --fix --ext js,ts,tsx src",
+    "build": "yarn lint && tsc",
     "build:watch": "tsc --watch",
-    "serve": "npm run build && firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
+    "serve": "yarn build && firebase emulators:start --only functions",
+    "shell": "yarn build && firebase functions:shell",
+    "start": "yarn shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
