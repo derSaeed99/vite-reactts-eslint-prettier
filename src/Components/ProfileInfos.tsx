@@ -60,8 +60,8 @@ export const ProfileInfos = ({ userProfile }: ProfileInforProps) => {
   return (
     <Box
       sx={{
-        boxShadow: 1,
-        borderRadius: "borderRadius",
+        borderRadius: 5,
+        border: "1px solid white",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

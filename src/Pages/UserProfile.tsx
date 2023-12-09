@@ -46,7 +46,7 @@ export const UserProfile = () => {
           <IconButton onClick={() => navigate("/")}>
             <ArrowBackIosNewRoundedIcon sx={{ color: "white" }} />
           </IconButton>
-          <Typography sx={{ color: "white" }}>Home</Typography>
+          <Typography sx={{ color: "white" }}>Memes</Typography>
         </Box>
         <Box>
           <ProfileInfos userProfile={userProfile} />

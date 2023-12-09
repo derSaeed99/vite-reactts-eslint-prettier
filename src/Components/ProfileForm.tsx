@@ -3,9 +3,16 @@ import { Field, Form, Formik } from "formik";
 import { Switch, TextField } from "formik-mui";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import * as Yup from "yup";
 
 import { updateUserProfile } from "../firebase";
 import { CaUser } from "../model";
+
+// ...
+
+const validationSchema = Yup.object().shape({
+  userName: Yup.string().required("Username is required"),
+});
 
 interface UserProfileFormProps {
   userProfile: CaUser | null;
@@ -54,6 +61,7 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
 
   return (
     <Formik
+      validationSchema={validationSchema}
       enableReinitialize={true}
       initialValues={initialValues}
       onSubmit={(values) => {
@@ -118,7 +126,7 @@ export const ProfileForm = ({ userProfile }: UserProfileFormProps) => {
                 InputLabelProps={{ sx: { color: "white" } }}
                 name="bio"
                 component={TextField}
-                label="Description"
+                label="Bio"
               />
             </Grid>
             <Grid item>
